@@ -10,6 +10,7 @@ import java.io.OutputStream;
 
 public class DetectOS {
     
+
     public String detectOS() {
         String os = "";
           try {
