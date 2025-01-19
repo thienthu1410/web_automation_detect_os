@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -39,6 +40,7 @@ public class DetectOS {
             processBuilder.redirectErrorStream(true);
 
             // Run python script and get ouput
+            try{
             Process process = processBuilder.start();
             try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
                 os = reader.readLine();                                                    
@@ -46,7 +48,10 @@ public class DetectOS {
 
             // Wait for python script finish
             int exitCode = process.waitFor();
-            System.out.println("Python script exited with code: " + exitCode);            
+            System.out.println("Python script exited with code: " + exitCode);   
+        } catch (IOException e) {
+            System.out.println("python is not regconized");
+        }
         } catch (Exception e) {
             e.printStackTrace();
         }
